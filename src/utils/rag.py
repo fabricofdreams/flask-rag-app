@@ -57,17 +57,22 @@ class RAG:
         return self.truncate_context(context, self.max_context_tokens)
 
     def generate_response(self, query):
-        """Generate a response using the RAG approach."""
         query_embedding = generate_embeddings(query)
         if not query_embedding:
-            return "Error generating query embedding"
+            return "Error generando la consulta."
 
-        # Get relevant context
+        # Obtiene el contexto relevante de los documentos
         context = self.find_relevant_context(query_embedding)
 
-        # Prepare prompts
-        system_prompt = "You are a helpful assistant. Use the provided context to answer the question."
-        query_with_context = f"Context: {context}\n\nQuestion: {query}"
+        # Mensaje del sistema que indica el rol y uso del contexto
+        system_prompt = (
+            "Eres un asistente experto en documentos. "
+            "El siguiente contexto corresponde al contenido extraído de los archivos PDF subidos. "
+            "Utiliza este contexto para responder de manera precisa a la pregunta. "
+            "Si el contexto está vacío, informa que no se encontró información relevante."
+        )
+
+        query_with_context = f"Contexto: {context}\n\nPregunta: {query}"
 
         try:
             response = self.client.chat.completions.create(
@@ -81,4 +86,4 @@ class RAG:
             )
             return response.choices[0].message.content
         except Exception as e:
-            return f"Error generating response: {str(e)}"
+            return f"Error generando la respuesta: {str(e)}"

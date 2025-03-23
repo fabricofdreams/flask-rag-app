@@ -2,6 +2,21 @@
 <div class="container">
   <h1>Sistema de Consulta de Documentos PDF</h1>
 
+  <!-- Sección de documentos subidos -->
+  <section class="uploaded-documents">
+    <h2>Documentos Subidos</h2>
+    {% if uploaded_files %}
+    <ul>
+      {% for file in uploaded_files %}
+      <li>{{ file }}</li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>No hay documentos subidos.</p>
+    {% endif %}
+  </section>
+
+  <!-- Sección de subida de PDFs -->
   <section class="upload-section">
     <h2>Subir Archivos PDF</h2>
     <form
@@ -14,6 +29,7 @@
     </form>
   </section>
 
+  <!-- Sección para realizar consultas -->
   <section class="query-section" id="query-section">
     <h2>Realizar Consulta</h2>
     <form id="queryForm">
