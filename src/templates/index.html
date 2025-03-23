@@ -1,28 +1,28 @@
 {% extends "base.html" %} {% block content %}
 <div class="container">
-  <h1>PDF Document Query System</h1>
+  <h1>Sistema de Consulta de Documentos PDF</h1>
 
   <section class="upload-section">
-    <h2>Upload PDF Files</h2>
+    <h2>Subir Archivos PDF</h2>
     <form
       action="{{ url_for('upload_file') }}"
       method="post"
       enctype="multipart/form-data"
     >
       <input type="file" name="pdf_files" accept=".pdf" multiple required />
-      <button type="submit">Upload</button>
+      <button type="submit">Subir</button>
     </form>
   </section>
 
   <section class="query-section" id="query-section">
-    <h2>Ask Questions</h2>
+    <h2>Realizar Consulta</h2>
     <form id="queryForm">
       <textarea
         name="query"
-        placeholder="Enter your question..."
+        placeholder="Escribe tu consulta aquí..."
         required
       ></textarea>
-      <button type="submit">Ask</button>
+      <button type="submit">Enviar</button>
     </form>
     <div id="response"></div>
   </section>
@@ -42,7 +42,7 @@
     const data = await response.json();
     document.getElementById(
       "response"
-    ).innerHTML = `<p><strong>Response:</strong> ${data.response}</p>`;
+    ).innerHTML = `<p><strong>Respuesta:</strong> ${data.response}</p>`;
   };
 </script>
 {% endblock %}

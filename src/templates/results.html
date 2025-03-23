@@ -1,27 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <title>Results</title>
-</head>
-<body>
-    <div class="container">
-        <h1>Results</h1>
-        <div class="results">
-            {% if results %}
-                <h2>Processed Results:</h2>
-                <ul>
-                    {% for result in results %}
-                        <li>{{ result }}</li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <p>No results to display.</p>
-            {% endif %}
-        </div>
-        <a href="{{ url_for('index') }}">Upload more PDFs</a>
-    </div>
-</body>
-</html>
+{% extends "base.html" %} {% block content %}
+<div class="container">
+  <h1>Resultados de la Subida</h1>
+  {% if processed_files %}
+  <p>Archivos procesados:</p>
+  <ul>
+    {% for file in processed_files %}
+    <li>{{ file }}</li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>No se procesó ningún archivo.</p>
+  {% endif %}
+  <a href="{{ url_for('index') }}" class="btn-back">Volver al inicio</a>
+</div>
+{% endblock %}

@@ -7,8 +7,14 @@ from config.settings import Config
 app = Flask(__name__)
 app.config.from_object(Config)
 
+# Ensure PDF upload directory exists
+os.makedirs(Config.PDF_UPLOAD_FOLDER, exist_ok=True)
+
 # Inicializamos el sistema RAG
 rag_system = RAG()
+
+# Global variable to store Q&A history
+QNA_HISTORY = []
 
 
 @app.route('/')
@@ -46,10 +52,15 @@ def query():
         return jsonify({"error": "No query provided"}), 400
 
     response = rag_system.generate_response(query)
+    # Store this Q&A in history
+    QNA_HISTORY.append({"question": query, "answer": response})
     return jsonify({"response": response})
 
 
+@app.route('/history')
+def history():
+    return render_template('history.html', qna_history=QNA_HISTORY)
+
+
 if __name__ == '__main__':
-    # Asegurarse de que existe el directorio para PDFs
-    os.makedirs(Config.PDF_UPLOAD_FOLDER, exist_ok=True)
-    app.run(debug=Config.DEBUG)
+    app.run(debug=app.config['DEBUG'])
