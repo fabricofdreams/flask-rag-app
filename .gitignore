@@ -5,3 +5,6 @@ __pycache__/
 .env
 
 data/pdf/
+
+# Ignore all .pdf files in the data/pdf/ directory
+/src/data/pdf/
