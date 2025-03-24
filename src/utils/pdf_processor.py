@@ -1,22 +1,15 @@
 def process_pdf(file_path):
     """
-    Process the PDF file to extract text and prepare data for RAG methodology.
-    
-    Args:
-        file_path (str): The path to the PDF file to be processed.
-    
-    Returns:
-        str: Extracted text from the PDF.
+    Esta función recibe la ruta de un PDF y devuelve el texto extraído.
+    Se puede implementar con PyPDF2 u otra librería.
     """
-    from PyPDF2 import PdfReader
-
-    text = ""
     try:
-        with open(file_path, "rb") as file:
-            reader = PdfReader(file)
-            for page in reader.pages:
-                text += page.extract_text() + "\n"
+        from PyPDF2 import PdfReader
+        reader = PdfReader(file_path)
+        text = ""
+        for page in reader.pages:
+            text += page.extract_text() or ""
+        return text
     except Exception as e:
-        print(f"Error processing PDF: {e}")
-    
-    return text.strip()  # Return the extracted text without leading/trailing whitespace.
+        print(f"Error procesando PDF: {e}")
+        return ""

@@ -21,7 +21,7 @@ class RAG:
         try:
             return len(self.tokenizer.encode(text))
         except Exception as e:
-            print(f"Error counting tokens: {e}")
+            print(f"Error contando tokens: {e}")
             return 0
 
     def truncate_context(self, context, available_tokens):
@@ -67,9 +67,9 @@ class RAG:
         # Mensaje del sistema que indica el rol y uso del contexto
         system_prompt = (
             "Eres un asistente experto en documentos. "
-            "El siguiente contexto corresponde al contenido extraído de los archivos PDF subidos. "
-            "Utiliza este contexto para responder de manera precisa a la pregunta. "
-            "Si el contexto está vacío, informa que no se encontró información relevante."
+            "El contexto que se muestra a continuación corresponde al contenido extraído de los archivos PDF subidos. "
+            "Usa este contexto para responder de manera precisa a la pregunta. "
+            "Si el contexto está vacío, indica que no se encontró información relevante."
         )
 
         query_with_context = f"Contexto: {context}\n\nPregunta: {query}"
@@ -86,4 +86,4 @@ class RAG:
             )
             return response.choices[0].message.content
         except Exception as e:
-            return f"Error generando la respuesta: {str(e)}"
+            return f"Error generando respuesta: {str(e)}"

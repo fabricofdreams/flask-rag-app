@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aplicación Flask RAG</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-..."
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <nav>
+      <div class="nav-container">
+        <a href="{{ url_for('index') }}" class="logo">RAG App</a>
+        <ul class="nav-links">
+          <li><a href="{{ url_for('index') }}">Inicio</a></li>
+          <li><a href="{{ url_for('history') }}">Historial</a></li>
+        </ul>
+        <button id="toggleTheme" class="theme-toggle">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+      </div>
+    </nav>
+    <main>{% block content %}{% endblock %}</main>
+    <footer>
+      <p>&copy; {{ 2025 }} Aplicación Flask RAG</p>
+    </footer>
+    <script>
+      const toggleBtn = document.getElementById("toggleTheme");
+      toggleBtn.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+        const icon = toggleBtn.querySelector("i");
+        if (document.body.classList.contains("dark-mode")) {
+          icon.classList.remove("fa-moon");
+          icon.classList.add("fa-sun");
+        } else {
+          icon.classList.remove("fa-sun");
+          icon.classList.add("fa-moon");
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,18 @@
+{% extends "base.html" %} {% block content %}
+<div class="container">
+  <h1>Historial de Preguntas y Respuestas</h1>
+  {% if qna_history %}
+  <ul class="qna-list">
+    {% for item in qna_history %}
+    <li class="qna-item">
+      <p><strong>Pregunta:</strong> {{ item.question }}</p>
+      <p><strong>Respuesta:</strong> {{ item.answer }}</p>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>No hay historial disponible.</p>
+  {% endif %}
+  <a href="{{ url_for('index') }}" class="btn-back">Volver al Inicio</a>
+</div>
+{% endblock %}
