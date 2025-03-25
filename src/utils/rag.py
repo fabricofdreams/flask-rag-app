@@ -11,7 +11,7 @@ class RAG:
         self.document_embeddings = []
         self.documents = []
         self.client = OpenAI(api_key=Config.OPENAI_API_KEY)
-        self.model = "gpt-4"
+        self.model = "gpt-4o-mini"
         self.tokenizer = tiktoken.encoding_for_model(self.model)
         self.max_context_tokens = 6000  # Reserve tokens for system prompt and response
         self.max_response_tokens = 1000
